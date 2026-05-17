@@ -447,6 +447,7 @@ public sealed partial class CliParserGenerator : IIncrementalGenerator
 		});
 	}
 
+
 	/// <summary>New Execute — fully incremental: no Compilation reference, works with symbol-free AnalyzedInvocation[].</summary>
 	private static void Execute(
 		SourceProductionContext context,

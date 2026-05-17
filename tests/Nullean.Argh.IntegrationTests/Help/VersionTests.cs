@@ -12,11 +12,10 @@ public class VersionTests
 	{
 		var dll = Path.Combine(AppContext.BaseDirectory, CliHostPaths.CliHostDllFileName);
 		var asm = Assembly.LoadFrom(dll);
-		var version = asm.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
-			?? asm.GetName().Version!.ToString();
+		var ver = asm.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
+		          ?? asm.GetName().Version!.ToString();
 		var result = CliHostRunner.Run("--version");
-
 		result.ExitCode.Should().Be(0);
-		CliHostRunner.StdoutText(result).Trim().Should().Be(version);
+		CliHostRunner.StdoutText(result).Trim().Should().Be(ver);
 	}
 }
