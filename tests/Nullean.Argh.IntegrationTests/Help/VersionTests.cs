@@ -11,10 +11,9 @@ public class VersionTests
 	public void Version_stdout_matches_cli_host_informational_version()
 	{
 		var dll = Path.Combine(AppContext.BaseDirectory, CliHostPaths.CliHostDllFileName);
-		var version = Assembly.LoadFrom(dll)
-			.GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
-			.InformationalVersion;
-
+		var asm = Assembly.LoadFrom(dll);
+		var version = asm.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
+			?? asm.GetName().Version!.ToString();
 		var result = CliHostRunner.Run("--version");
 
 		result.ExitCode.Should().Be(0);
